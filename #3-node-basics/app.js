@@ -15,9 +15,21 @@ const server = http.createServer((req, res)=>{
        return  res.end();
     }
     if(url==="/message" && method==='POST'){
-       fs.writeFileSync("message.txt", "Dummy Text");
+        const body = [];
+        // listen lchucks coming in request
+        req.on("data", (chunk)=>{
+            console.log(chunk);
+            body.push(chunk);
+        });
+        req.on("end", ()=>{
+            const parseBody = Buffer.concat(body).toString();
+            console.log(parseBody);
+            const message = parseBody.split("=")[1];
+            fs.writeFileSync("message.txt",message);
+        });
+
         res.statusCode = 302;
-        res.setHeader('Location', '/');
+        res.setHeader('Location', '/');// redirecting request
         return res.end();
     //    res.writeHead(302, {"Location": "/"}); // this equivalant to above 2 lines
     }
