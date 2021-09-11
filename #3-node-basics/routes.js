@@ -11,7 +11,7 @@ const requestHandler = (req, res)=>{
         res.write("<head><title>Base page</title></head>");
         res.write("<body> <form action='/message' method = 'POST'><input type='text' name='input1'><button type='submit'>Send</button></form></body>");
         res.write("</html>");
-       return  res.end();
+    return  res.end();
     }
     if(url==="/message" && method==='POST'){
         const body = [];
@@ -20,7 +20,7 @@ const requestHandler = (req, res)=>{
             console.log(chunk);
             body.push(chunk);
         });
-      return   req.on("end", ()=>{
+    return   req.on("end", ()=>{
             const parseBody = Buffer.concat(body).toString();
             console.log(parseBody);
             const message = parseBody.split("=")[1];
