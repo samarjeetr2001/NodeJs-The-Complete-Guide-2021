@@ -7,7 +7,7 @@ const app = express();
 
 app.use(express.urlencoded({extended: false}))
 
-app.use(adminRoute);
+app.use('/admin',adminRoute);
 app.use(shopRoute);
 app.use((req, res, next)=>{
     res.status(404).send('<h1> Page not gound </h1>');
