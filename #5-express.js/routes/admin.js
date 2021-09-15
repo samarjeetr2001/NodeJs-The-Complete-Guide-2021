@@ -10,16 +10,16 @@ const router = express.Router();
 //     next();
 // });
 //! /admin/add-product
-router.get('/add-product',(req, res, next)=>{
+router.get('/add-product', (req, res, next) => {
     console.log("In the middleware of add product ");
     // res.send('<form action="/admin/add-product" method="POST"><input type="text" name="title"><button type="submit">submit</button></form>');
     res.sendFile(path.join(rootDir, 'views', 'add-product.html'));
 });
 
 //! /admin/add-product
-router.post('/add-product',(req, res, next)=>{
+router.post('/add-product', (req, res, next) => {
     console.log(req.body);
-        res.redirect('/');
+    res.redirect('/');
 });
 
 // app.use('/product',(req, res, next)=>{
@@ -34,7 +34,7 @@ router.post('/add-product',(req, res, next)=>{
 // similarly we have for delte, update, add
 
 //! /admin/product
-router.post('/product',(req, res, next)=>{
+router.post('/product', (req, res, next) => {
     console.log("product post function");
     console.log(req.body);
     res.redirect('/');

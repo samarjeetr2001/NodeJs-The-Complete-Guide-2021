@@ -7,11 +7,12 @@ const rootDir = require('./util/path')
 
 const app = express();
 
-app.use(express.urlencoded({extended: false}))
+app.use(express.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/admin',adminRoute);
+app.use('/admin', adminRoute);
 app.use(shopRoute);
-app.use((req, res, next)=>{
+app.use((req, res, next) => {
     res.status(404).sendFile(path.join(rootDir, 'views', 'page-not-found.html'));
 });
 

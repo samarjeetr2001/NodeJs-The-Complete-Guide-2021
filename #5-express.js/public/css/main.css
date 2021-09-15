@@ -1,0 +1,45 @@
+body {
+  padding: 0;
+  margin: 0;
+  font-family: sans-serif;
+}
+
+main {
+  padding: 1rem;
+}
+
+.main-header {
+  width: 100%;
+  height: 3.5rem;
+  background-color: #dbc441;
+  padding: 0 1.5rem;
+}
+
+.main-headernav {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.main-headeritem-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.main-headeritem {
+  margin: 0 1rem;
+  padding: 0;
+}
+
+.main-headeritem a {
+  text-decoration: none;
+  color: black;
+}
+
+.main-headeritem a:hover,
+.main-headeritem a:active,
+.main-header__item a.active {
+  color: #3e00a1;
+}
