@@ -7,7 +7,7 @@ const router = express.Router();
 //     next();
 // });
 
-router.use('/add-product',(req, res, next)=>{
+router.get('/add-product',(req, res, next)=>{
     console.log("In the middleware of add product ");
     res.send('<form action="/product" method="POST"><input type="text" name="title"><button type="submit">submit</button></form>');
 });
