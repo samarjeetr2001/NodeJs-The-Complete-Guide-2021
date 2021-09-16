@@ -29,6 +29,18 @@
             "restart": true,
             "runtimeExecutable": "nodemon",
             "console":  "integratedTerminal"
+        },
+        {
+            "type": "pwa-node",
+            "request": "launch",
+            "name": "#6-dynamic-content-&-templates",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}\\#6-dynamic-content-&-templates\\app.js",
+            "restart": true,
+            "runtimeExecutable": "nodemon",
+            "console":  "integratedTerminal"
         }
     ]
 }
