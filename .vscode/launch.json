@@ -41,6 +41,18 @@
             "restart": true,
             "runtimeExecutable": "nodemon",
             "console":  "integratedTerminal"
+        },
+        {
+            "type": "pwa-node",
+            "request": "launch",
+            "name": "#8-ecommerce",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}\\#8-ecommerce\\app.js",
+            "restart": true,
+            "runtimeExecutable": "nodemon",
+            "console":  "integratedTerminal"
         }
     ]
 }
