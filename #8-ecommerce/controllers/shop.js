@@ -2,39 +2,63 @@ const Product = require('../models/product');
 const Cart = require('../models/cart');
 
 exports.getProducts = (req, res, next) => {
-  Product.fetchAll()
-    .then(([rows, fieldData]) => {
+  Product.findAll()
+    .then(products => {
       res.render('shop/product-list', {
-        prods: rows,
+        prods: products,
         pageTitle: 'All Products',
         path: '/products'
       });
     })
     .catch((err) => {
-      console.log('Error in getProducts : ', err);
+      console.log('Error in getIndex : ', err);
     });
+  // Product.fetchAll()
+  //   .then(([rows, fieldData]) => {
+  //     res.render('shop/product-list', {
+  //       prods: rows,
+  //       pageTitle: 'All Products',
+  //       path: '/products'
+  //     });
+  //   })
+  //   .catch((err) => {
+  //     console.log('Error in getProducts : ', err);
+  //   });
 };
 
 exports.getProduct = (req, res, next) => {
   const prodId = req.params.productId;
-  Product.findById(prodId)
-    .then(([row, fieldData]) => {
+  // Product.findAll({ where: { id: prodId } })
+
+  Product.findByPk(prodId)
+    .then((product) => {
       res.render('shop/product-detail', {
-        product: row[0],
-        pageTitle: row[0].title,
+        product: product,
+        pageTitle: product.title,
         path: '/products'
       });
     })
     .catch(err => {
       console.log('Error in getProduct : ', err);
     });
+  // Product.findById(prodId)
+  //   .then(([row, fieldData]) => {
+  //     res.render('shop/product-detail', {
+  //       product: row[0],
+  //       pageTitle: row[0].title,
+  //       path: '/products'
+  //     });
+  //   })
+  //   .catch(err => {
+  //     console.log('Error in getProduct : ', err);
+  //   });
 };
 
 exports.getIndex = (req, res, next) => {
-  Product.fetchAll()
-    .then(([rows, fieldData]) => {
+  Product.findAll()
+    .then(products => {
       res.render('shop/index', {
-        prods: rows,
+        prods: products,
         pageTitle: 'Shop',
         path: '/'
       });
@@ -42,6 +66,17 @@ exports.getIndex = (req, res, next) => {
     .catch((err) => {
       console.log('Error in getIndex : ', err);
     });
+  // Product.fetchAll()
+  //   .then(([rows, fieldData]) => {
+  //     res.render('shop/index', {
+  //       prods: rows,
+  //       pageTitle: 'Shop',
+  //       path: '/'
+  //     });
+  //   })
+  //   .catch((err) => {
+  //     console.log('Error in getIndex : ', err);
+  //   });
 };
 
 exports.getCart = (req, res, next) => {
