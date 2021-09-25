@@ -13,12 +13,20 @@ exports.postAddProduct = (req, res, next) => {
   const imageUrl = req.body.imageUrl;
   const price = req.body.price;
   const description = req.body.description;
-  Product.create({
+  //  special function createProduct created by sequelize due to association
+  req.user.createProduct({
     title: title,
     price: price,
     imageUrl: imageUrl,
     description: description,
   })
+    // Product.create({
+    //   title: title,
+    //   price: price,
+    //   imageUrl: imageUrl,
+    //   description: description,
+    //   userId: req.user.id,
+    // })
     .then((result) => {
       res.redirect('/admin/products');
     })
