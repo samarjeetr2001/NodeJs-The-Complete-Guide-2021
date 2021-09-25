@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 
 const errorController = require('./controllers/error');
 const sequelize = require('./util/database');
+const Product = require('./models/product');
+const User = require('./models/user');
 
 const app = express();
 
@@ -13,19 +15,46 @@ app.set('views', 'views');
 
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
+const e = require('express');
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
+app.use((req, res, next) => {
+    User.findByPk(1)
+        .then((user) => {
+            req.user = user;
+            next();
+        })
+        .catch(err => {
+            console.log(err);
+        });
+});
 
 app.use(errorController.get404);
 
-sequelize.sync()
-    .then((result)=>{
+Product.belongsTo(User, { constraints: true, onDelete: 'CASCADE' });
+User.hasMany(Product);
+
+sequelize
+    .sync()
+    // .sync({ force: true })
+    .then((result) => {
+        return User.findByPk(1);
         // console.log(result);
+    }).then((user) => {
+        if (!user) {
+            return User.create({ name: 'Samarjet', email: 'test@test.com' });
+        } else {
+            return user;
+        }
+    }).then(user => {
+        // console.log(user);
         app.listen(3000);
     })
-    .catch(()=>{});
+    .catch((err) => {
+        console.log(err);
+    });
 
