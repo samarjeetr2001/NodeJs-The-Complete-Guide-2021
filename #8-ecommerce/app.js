@@ -23,8 +23,6 @@ const e = require('express');
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/admin', adminRoutes);
-app.use(shopRoutes);
 app.use((req, res, next) => {
     User.findByPk(1)
         .then((user) => {
@@ -35,6 +33,9 @@ app.use((req, res, next) => {
             console.log(err);
         });
 });
+app.use('/admin', adminRoutes);
+app.use(shopRoutes);
+
 
 app.use(errorController.get404);
 
@@ -59,6 +60,17 @@ sequelize
         }
     }).then(user => {
         // console.log(user);
+        user.getCart()
+            .then(cart => {
+                if (!cart) {
+                    return user.createCart();
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    })
+    .then(() => {
         app.listen(3000);
     })
     .catch((err) => {

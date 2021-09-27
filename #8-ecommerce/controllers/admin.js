@@ -20,13 +20,6 @@ exports.postAddProduct = (req, res, next) => {
     imageUrl: imageUrl,
     description: description,
   })
-    // Product.create({
-    //   title: title,
-    //   price: price,
-    //   imageUrl: imageUrl,
-    //   description: description,
-    //   userId: req.user.id,
-    // })
     .then((result) => {
       res.redirect('/admin/products');
     })
