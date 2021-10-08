@@ -18,6 +18,7 @@ exports.postAddProduct = (req, res, next) => {
     price: price,
     description: description,
     imageUrl: imageUrl,
+    userId: req.user._id, //! OR userId : req.user // mongoose will automatically store id
   });
   product
     .save()
